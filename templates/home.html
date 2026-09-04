@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Django Accounts OAuth{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="jumbotron bg-light p-5 rounded-lg mt-4">
+            <h1 class="display-4">Welcome to Django Accounts OAuth</h1>
+            <p class="lead">A production-ready, reusable Django authentication app with Google OAuth support.</p>
+            <hr class="my-4">
+            
+            {% if user.is_authenticated %}
+                <div class="alert alert-success">
+                    <h4 class="alert-heading">Hello, {{ user.get_full_name|default:user.username }}!</h4>
+                    <p>You are logged in. Explore the features below.</p>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Your Profile</h5>
+                                <p class="card-text">View and edit your profile information.</p>
+                                <a href="{% url 'account_change_password' %}" class="btn btn-primary">Change Password</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Connected Accounts</h5>
+                                <p class="card-text">Manage your connected OAuth providers.</p>
+                                <a href="{% url 'socialaccount_connections' %}" class="btn btn-primary">Manage Connections</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Get started by logging in or signing up.</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
+                <a class="btn btn-secondary btn-lg" href="{% url 'account_login' %}" role="button">Login</a>
+            {% endif %}
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🔐 Secure Authentication</h5>
+                        <p class="card-text">Built-in security features including password hashing and session management.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🌐 Google OAuth</h5>
+                        <p class="card-text">Seamless integration with Google OAuth for secure third-party authentication.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">♻️ Reusable</h5>
+                        <p class="card-text">Designed as a self-contained app that can be easily copied to other Django projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
